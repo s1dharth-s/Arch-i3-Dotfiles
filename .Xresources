@@ -1,0 +1,29 @@
+URxvt.font: xft:Hack:size=10
+URxvt.letterSpace:0
+URxvt.scrollBar: false
+! Set terminal padding
+URxvt.internalBorder: 15
+URxvt*.depth: 24
+
+! Enables copy/paste with Ctrl-Shift-C/V
+URxvt.iso14755: false
+URxvt.iso14755_52: false
+URxvt.perl-ext-common: default,clipboard
+URxvt.keysym.Shift-Control-C: perl:clipboard:copy
+URxvt.keysym.Shift-Control-V: perl:clipboard:paste
+
+*.saveLines: 8192
+*.internalBorder: 10
+*.cursorUnderline: true
+*.cursorBlink: true
+*.dynamicColors:on
+
+Xft.autohint: 0
+Xft.dpi: 96
+Xft.hintstyle: hintnone
+Xft.lcdfilter: lcddefault
+Xft.rgba: rgb
+
+! Rofi
+rofi.color-window: argb: EE000000, argb: EE000000, argb: EE000000
+rofi.color-normal: argb: 00000000, #DEDEDE, argb: 00000000, #DEDEDE
