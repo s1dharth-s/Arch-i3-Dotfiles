@@ -204,3 +204,10 @@ client.urgent           $bg     $bg     $fg  $bg       $bg
 client.placeholder      $bg     $bg     $fg  $bg       $bg
 
 client.background       $bg
+
+#window pixel
+new_window pixel 3
+new_float pixel 2
+
+# change focus between tiling / floating windows
+bindsym $mod+t focus mode_toggle
