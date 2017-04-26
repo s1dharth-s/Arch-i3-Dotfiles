@@ -28,7 +28,7 @@ font pango:monospace 8
 floating_modifier $mod
 
 # start a terminal
-bindsym $mod+Return exec i3-sensible-terminal
+bindsym $mod+Return exec urxvt
 
 # kill focused window
 bindsym $mod+Shift+q kill
@@ -95,12 +95,13 @@ bindsym $mod+a focus parent
 set $workspace1 "1. Terminals"
 set $workspace2 "2. Firefox"
 set $workspace3 "3. File Manager"
+set $workspace4 "4.Extra Stuff"
 
 # switch to workspace
 bindsym $mod+1 workspace $workspace1
 bindsym $mod+2 workspace $workspace2
 bindsym $mod+3 workspace $workspace3
-bindsym $mod+4 workspace 4
+bindsym $mod+4 workspace $workspace4
 bindsym $mod+5 workspace 5
 bindsym $mod+6 workspace 6
 bindsym $mod+7 workspace 7
@@ -112,7 +113,7 @@ bindsym $mod+0 workspace 10
 bindsym $mod+Shift+1 move container to workspace $workspace1
 bindsym $mod+Shift+2 move container to workspace $workspace2
 bindsym $mod+Shift+3 move container to workspace $workspace3
-bindsym $mod+Shift+4 move container to workspace 4
+bindsym $mod+Shift+4 move container to workspace $workspace4
 bindsym $mod+Shift+5 move container to workspace 5
 bindsym $mod+Shift+6 move container to workspace 6
 bindsym $mod+Shift+7 move container to workspace 7
@@ -166,7 +167,6 @@ bar {
 
 #disable title bars
 	for_window [class="^.*"] border pixel 0
-	new_window 1pixel
 #gaps
     #smart_gaps on
     gaps inner 18
@@ -184,7 +184,10 @@ bar {
 
 exec --no-startup-id firefox
 exec --no-startup-id thunar
-exec --no-startup-id urxvt
+
+#start a floating urxvt terminal on startup
+exec --no-startup-id urxvt -name "floating_urxvt"
+for_window [class="URxvt" instance="floating_urxvt$"] floating toggle
 
 #Custom Key Bindings
 bindsym $mod+p exec --no-startup-id scrot
@@ -203,9 +206,7 @@ client.placeholder      $bg     $bg     $fg  $bg       $bg
 
 client.background       $bg
 
-#window pixel
-new_window pixel 3
-new_float pixel 2
+#program specific settings
+for_window [class="URxvt"] border pixel 3
+for_window [class="Lxappearance"] floating enable
 
-# change focus between tiling / floating windows
-bindsym $mod+t focus mode_toggle
