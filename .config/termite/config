@@ -1,1 +1,8 @@
+[options]
+allow_bold = true
+browser = firefox
+clickable_url = true
+font = Source Code Pro for Powerline 11
 
+[colors]
+background = rgba(63, 63, 63, 0.8)
