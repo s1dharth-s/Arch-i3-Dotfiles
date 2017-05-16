@@ -11,7 +11,7 @@ set $mod Mod4
 
 # Font for window titles. Will also be used by the bar unless a different font
 # is used in the bar {} block below.
-font pango:monospace 8
+font pango:Roboto 8
 
 # This font is widely installed, provides lots of unicode glyphs, right-to-left
 # text rendering and scalability on retina/hidpi displays (thanks to pango).
@@ -28,7 +28,7 @@ font pango:monospace 8
 floating_modifier $mod
 
 # start a terminal
-bindsym $mod+Return exec urxvt
+bindsym $mod+Return exec termite
 
 # kill focused window
 bindsym $mod+Shift+q kill
@@ -92,17 +92,17 @@ bindsym $mod+a focus parent
 
 #Workspace variables
 
-set $workspace1 "1. Terminals"
-set $workspace2 "2. Firefox"
-set $workspace3 "3. File Manager"
-set $workspace4 "4.Extra Stuff"
-
+set $workspace1 "1  "
+set $workspace2 "2  "
+set $workspace3 "3  "
+set $workspace4 "4 "
+set $workspace5 "5 "
 # switch to workspace
 bindsym $mod+1 workspace $workspace1
 bindsym $mod+2 workspace $workspace2
 bindsym $mod+3 workspace $workspace3
 bindsym $mod+4 workspace $workspace4
-bindsym $mod+5 workspace 5
+bindsym $mod+5 workspace $workspace5
 bindsym $mod+6 workspace 6
 bindsym $mod+7 workspace 7
 bindsym $mod+8 workspace 8
@@ -161,9 +161,9 @@ bindsym $mod+r mode "resize"
 
 # Start i3bar to display a workspace bar (plus the system information i3status
 # finds out, if available)
-bar {
-        status_command i3blocks 
-}
+#bar {
+#        status_command i3blocks 
+#}
 
 #disable title bars
 	for_window [class="^.*"] border pixel 0
@@ -172,42 +172,42 @@ bar {
     gaps inner 18
     gaps outer 4
 
-#feh(not currently in use as wal is used to set wallpaper)	
-#exec --no-startup-id feh --bg-fill ~/Downloads/wallp.jpg
+#feh	
+exec --no-startup-id feh --bg-fill ~/Downloads/walll
 
 #startup things
 	exec --no-startup-id xrdb ~/.Xresources
-	exec --no-startup-id ~/wal -i "$(< "${HOME}/.cache/wal/wal")"
+	exec --no-startup-id ~/wal -i "$(< "${HOME}/.cache/wal/wal")" -t -n
 	exec --no-startup-id compton --config ~/.config/compton.conf -b	
-
+	exec_always --no-startup-id $HOME/.config/polybar/launch.sh
 #executing programs on startup
 
 exec --no-startup-id firefox
 exec --no-startup-id thunar
 
 #start a floating urxvt terminal on startup
-exec --no-startup-id urxvt -name "floating_urxvt"
-for_window [class="URxvt" instance="floating_urxvt$"] floating toggle
+exec --no-startup-id termite -name "floating_urxvt"
+for_window [class="Termite" instance="floating_urxvt$"] floating toggle
 
 #Custom Key Bindings
-bindsym $mod+p exec --no-startup-id scrot
+bindsym $mod+p exec --no-startup-id scrot && echo "Taking screenshot..."
 bindsym $mod+Delete exec poweroff
 
 #COLOR
 set_from_resource $fg i3wm.color7 #f0f0f0
 set_from_resource $bg i3wm.color2 #f0f0f0
 
-# class                 border  backgr. text indicator child_border
-client.focused          $bg     $bg     $fg  $bg       $bg
-client.focused_inactive $bg     $bg     $fg  $bg       $bg
-client.unfocused        $bg     $bg     $fg  $bg       $bg
+# class                  border  backgr. text indicator child_border
+client.focused          #C85951    $bg     $fg  $bg       $bg
+client.focused_inactive #C85951    $bg     $fg  $bg       $bg
+client.unfocused        #FFF8E7    $bg     $fg  $bg       $bg
 client.urgent           $bg     $bg     $fg  $bg       $bg
 client.placeholder      $bg     $bg     $fg  $bg       $bg
 
 client.background       $bg
 
 #program specific settings
-for_window [class="URxvt"] border pixel 3
+for_window [class="Termite"] border pixel 2
 for_window [class="Lxappearance"] floating enable
 for_window [class="Gedit"] floating enable
 for_window [class="Pavucontrol"] floating enable
