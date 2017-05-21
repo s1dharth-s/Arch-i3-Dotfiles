@@ -8,24 +8,24 @@
 ;=====================================================
 
 [colors]
-;background = ${xrdb:color0:#222}
-background = #222
+background = ${xrdb:color0:#222}
+;background = #222
 background-alt = #444
-;foreground = ${xrdb:color7:#222}
-foreground = #dfdfdf
+foreground = #c4b7c5
+;foreground = #dfdfdf
 foreground-alt = #555
 primary = #ffb52a
 secondary = #e60053
 alert = #bd2c40
 
-[bar/example]
+[bar/topbar]
 ;monitor = ${env:MONITOR:HDMI-1}
 width = 100%
-height = 27
-;offset-x = 1%
-;offset-y = 1%
-radius = 6.0
-fixed-center = false
+height = 33
+offset-x = 50
+offset-y = 50
+radius = 6
+fixed-center = true
 
 background = ${colors.background}
 foreground = ${colors.foreground}
@@ -36,22 +36,22 @@ line-color = #f00
 border-size = 4
 border-color = #00000000
 
-padding-left = 0
-padding-right = 2
+padding-left = 4
+padding-right = 4
 
-module-margin-left = 1
+module-margin-left = 2
 module-margin-right = 2
 
-font-0 = Roboto Mono for Powerline:pixelsize=9:weight=bold;0
-font-1 = FontAwesome
+font-0 = FontAwesome
+font-1 = Roboto Mono for Powerline:pixelsize=10:weight=bold;0
 
-modules-left = bspwm i3
-modules-center = 
-modules-right = filesystem xbacklight volume xkeyboard memory cpu wlan eth battery temperature date powermenu
+modules-left = i3
+modules-center = xwindow
+modules-right = volume updates memory cpu date time powermenu
 
 tray-position = right
 tray-padding = 2
-tray-transparent = true
+;tray-transparent = true
 ;tray-background = #0063ff
 
 ;wm-restack = bspwm
@@ -68,6 +68,7 @@ tray-transparent = true
 [module/xwindow]
 type = internal/xwindow
 label = %title:0:30:...%
+format-underline = #d17f14
 
 [module/xkeyboard]
 type = internal/xkeyboard
@@ -133,6 +134,50 @@ label-focused-padding = 1
 
 label-urgent-foreground = #e4b226
 label-urgent-padding = 1
+
+[module/powermenu]
+type = custom/menu
+
+label-open =   
+
+label-close = cancel
+
+label-close-background = #312842
+label-close-foreground = #ffeefc
+label-open-padding-left = 2
+label-open-padding-right = 2
+label-close-padding = 2
+
+menu-0-0 = lock
+menu-0-0-exec = ~/.config/scripts/lock.sh
+menu-0-0-background = #312842
+menu-0-0-foreground = #c05c47
+menu-0-0-padding-right = 3
+
+menu-0-1 = reboot
+menu-0-1-exec = menu-open-1
+menu-0-1-background = #312842
+menu-0-1-foreground = #c05c47
+menu-0-1-padding-right = 3
+
+menu-0-2 = power off
+menu-0-2-exec = menu-open-2
+menu-0-2-background = #312842
+menu-0-2-foreground = #c05c47
+menu-0-2-padding-right = 3
+
+menu-1-0 = reboot?  
+menu-1-0-exec = reboot
+menu-1-0-background = #312842
+menu-1-0-foreground = #e4b226
+menu-1-0-padding-right = 3
+
+menu-2-0 = power off?  
+menu-2-0-exec = poweroff
+menu-2-0-background = #312842
+menu-2-0-foreground = #e4b226
+menu-2-0-padding-right = 3
+
 [module/mpd]
 type = internal/mpd
 format-online = <label-song>  <icon-prev> <icon-stop> <toggle> <icon-next>
@@ -171,18 +216,18 @@ card = intel_backlight
 [module/cpu]
 type = internal/cpu
 interval = 2
-format-prefix = " "
-format-prefix-foreground = ${colors.foreground-alt}
-format-underline = #f90000
+format-prefix = " "
+format-prefix-foreground = #95B47B
+;format-underline = #f90000
 label = %percentage%%
 
 [module/memory]
 type = internal/memory
-interval = 2
-format-prefix = " "
-format-prefix-foreground = ${colors.foreground-alt}
-format-underline = #4bffdc
-label = %percentage_used%%
+interval = 1
+format-prefix = ""
+format-prefix-foreground = #B06A58
+;format-underline = #4bffdc
+label = %gb_used% (%percentage_used%%)
 
 [module/wlan]
 type = internal/network
@@ -226,30 +271,39 @@ format-disconnected =
 type = internal/date
 interval = 5
 
-date =
+date = "%d/%m-%Y"
 date-alt = " %Y-%m-%d"
 
 time = %H:%M
-time-alt = %H:%M:%S
+time-alt = %H:%M
 
-format-prefix = 
-format-prefix-foreground = ${colors.foreground-alt}
-format-underline = #0a6cf5
+format-prefix = " "
+format-prefix-foreground = #E5C078
+;format-underline = #0a6cf5
 
-label = %date% %time%
+label = %date%
+
+[module/time]
+type = internal/date
+interval = 5
+
+time = %H:%M
+format-prefix = " "
+format-prefix-foreground = #7B5E8D
+label = %time%
 
 [module/volume]
 type = internal/volume
 
 format-volume = <label-volume> <bar-volume>
-label-volume = VOL
-label-volume-foreground = ${root.foreground}
+label-volume = 
+label-volume-foreground = #c4b7c5
 
-format-muted-prefix = " "
+format-muted = <label-muted>
+label-muted = " " 
 format-muted-foreground = ${colors.foreground-alt}
-label-muted = sound muted
 
-bar-volume-width = 10
+bar-volume-width = 1
 bar-volume-foreground-0 = #55aa55
 bar-volume-foreground-1 = #55aa55
 bar-volume-foreground-2 = #55aa55
@@ -258,7 +312,7 @@ bar-volume-foreground-4 = #55aa55
 bar-volume-foreground-5 = #f5a70a
 bar-volume-foreground-6 = #ff5555
 bar-volume-gradient = false
-bar-volume-indicator = |
+bar-volume-indicator = 
 bar-volume-indicator-font = 2
 bar-volume-fill = ─
 bar-volume-fill-font = 2
@@ -312,32 +366,11 @@ ramp-1 = 
 ramp-2 = 
 ramp-foreground = ${colors.foreground-alt}
 
-[module/powermenu]
-type = custom/menu
-
-format-spacing = 1
-
-label-open = 
-label-open-foreground = ${colors.secondary}
-label-close =  cancel
-label-close-foreground = ${colors.secondary}
-label-separator = |
-label-separator-foreground = ${colors.foreground-alt}
-
-menu-0-0 = reboot
-menu-0-0-exec = menu-open-1
-menu-0-1 = power off
-menu-0-1-exec = menu-open-2
-
-menu-1-0 = cancel
-menu-1-0-exec = menu-open-0
-menu-1-1 = reboot
-menu-1-1-exec = sudo reboot
-
-menu-2-0 = power off
-menu-2-0-exec = sudo poweroff
-menu-2-1 = cancel
-menu-2-1-exec = menu-open-0
+[module/updates]
+type = custom/script
+exec = ~/.config/scripts/updates.sh
+interval = 100
+format-foreground = #566CA9
 
 [settings]
 screenchange-reload = true
