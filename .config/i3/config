@@ -43,7 +43,7 @@ bindsym $mod+d exec rofi -show run
 # change focus
 bindsym $mod+j focus left
 bindsym $mod+k focus down
-bindsym $mod+l focus up
+#bindsym $mod+l focus up
 bindsym $mod+semicolon focus right
 
 # alternatively, you can use the cursor keys:
@@ -114,7 +114,7 @@ bindsym $mod+Shift+1 move container to workspace $workspace1
 bindsym $mod+Shift+2 move container to workspace $workspace2
 bindsym $mod+Shift+3 move container to workspace $workspace3
 bindsym $mod+Shift+4 move container to workspace $workspace4
-bindsym $mod+Shift+5 move container to workspace 5
+bindsym $mod+Shift+5 move container to workspace $workspace5
 bindsym $mod+Shift+6 move container to workspace 6
 bindsym $mod+Shift+7 move container to workspace 7
 bindsym $mod+Shift+8 move container to workspace 8
@@ -169,16 +169,16 @@ bindsym $mod+r mode "resize"
 	for_window [class="^.*"] border pixel 0
 #gaps
     #smart_gaps on
-    gaps inner 18
-    gaps outer 4
+    gaps inner 15
+    gaps outer 3
 
 #feh	
-exec --no-startup-id feh --bg-fill ~/Downloads/walll
+exec --no-startup-id feh --bg-fill ~/Downloads/wallpaper
 
 #startup things
 	exec --no-startup-id xrdb ~/.Xresources
 	exec --no-startup-id ~/wal -i "$(< "${HOME}/.cache/wal/wal")" -t -n
-	exec --no-startup-id compton --config ~/.config/compton.conf -b	
+	exec --no-startup-id compton --config ~/.config/compton.conf -b
 	exec_always --no-startup-id $HOME/.config/polybar/launch.sh
 #executing programs on startup
 
@@ -192,6 +192,7 @@ for_window [class="Termite" instance="floating_urxvt$"] floating toggle
 #Custom Key Bindings
 bindsym $mod+p exec --no-startup-id scrot && echo "Taking screenshot..."
 bindsym $mod+Delete exec poweroff
+bindsym $mod+l exec --no-startup-id ~/.config/scripts/lock.sh
 
 #COLOR
 set_from_resource $fg i3wm.color7 #f0f0f0
@@ -211,3 +212,6 @@ for_window [class="Termite"] border pixel 2
 for_window [class="Lxappearance"] floating enable
 for_window [class="Gedit"] floating enable
 for_window [class="Pavucontrol"] floating enable
+for_window [class="Subl3"] floating enable
+
+bindsym $mod+G gaps outer current set 0;gaps inner current set 0
