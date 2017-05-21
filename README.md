@@ -9,4 +9,3 @@ Contains dot files of my Arch+i3-gaps install.
 
 _I use [wal](https://github.com/dylanaraps/wal) to generate my color scheme_  
   
-![scrot](https://imgur.com/r/unixporn/TNIcUw2)
