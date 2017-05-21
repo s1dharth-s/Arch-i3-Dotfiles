@@ -9,3 +9,5 @@ Contains dot files of my Arch+i3-gaps install.
 
 _I use [wal](https://github.com/dylanaraps/wal) to generate my color scheme_  
   
+## Screenshot
+![screenshot1](http://imgur.com/download/TNIcUw2/%5Bi3-gaps%5D%20My%20First%20Rice!)
